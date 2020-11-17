@@ -66,6 +66,10 @@
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.js"></script>
 
+  <!-- stockfish.js package -->
+  <script src="node_modules/stockfish/src/stockfish.js"></script>
+  <script src="engine.js"></script>
+
   <!-- <script type="text/javascript">
     const chess = new Chess();
     var xh = new XMLHttpRequest();
@@ -164,9 +168,9 @@
 </head>	
 
 <body>
-  <div id="app" class="full-height"></div>
+<!--   <div id="app" class="full-height"></div>
         <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
-      <script src="https://localhost.rig.twitch.tv:3000/twitch-ext.js"></script>
+      <script src="https://localhost.rig.twitch.tv:3000/twitch-ext.js"></script> -->
 
   <div style="width: 288px">
     <div id="header" style="background: #f3f3f3; width: 288px; border-bottom: 6px solid #f3f3f3">
@@ -316,7 +320,7 @@
       <!-- &#9812 through &#9823 are chess pieces -->
 
     <div id="moves" class="moves"></div>
-    <!-- <p id="test"></p> -->
+    <p id="evals"></p>
   </div>
 
   <!-- <script type="text/javascript">

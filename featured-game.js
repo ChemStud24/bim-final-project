@@ -3,6 +3,7 @@ const chess = new Chess();
 var xh = new XMLHttpRequest();
 var archLength = -1;
 var fens = [];
+var evals = [];
 var moveIdx = -1;
 var playing = false;
 var playId;
@@ -88,7 +89,12 @@ xh.onreadystatechange = function() {
       for (var i=0; i < hist.length; i++) {
         chess2.move(hist[i]);
         fens.push(chess2.fen());
+        stockfish.postMessage("position fen " + chess2.fen());
+        stockfish.postMessage("go depth 15");
       }
+
+      // print list of evaluations
+      document.getElementById("evals").innerHTML = evals.join(" ");
     }
   }
 };
@@ -107,7 +113,7 @@ function update() {
 }
 
 update();
-setInterval(update,30000); // update every 30 seconds with the most recent game
+// setInterval(update,30000); // update every 30 seconds with the most recent game
 
 // add position navigation functions
 function goToStart() {
