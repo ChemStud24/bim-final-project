@@ -21,12 +21,17 @@ xh.onreadystatechange = function() {
     archLength = archive.games.length;
     gameIdx = archLength - 1;
     updateGame();
+    stockfish.postMessage("isready");
   }
 };
 
 function updateGame() {
   stopNOW = true;
+  stockfish.postMessage("stop");
   evals = [];
+  if (finished) {
+    stockfish.postMessage("isready");
+  }
   document.getElementById("gameNumber").innerHTML = "Game " + (gameIdx + 1) + " of " + archLength;
 
   var game = archive.games[gameIdx];
@@ -107,7 +112,7 @@ function updateGame() {
   // document.getElementById("fens").innerHTML = "<p>" + fens.join("</p><p>") + "</p>";
 
   // print list of evaluations
-  stockfish.postMessage("isready");
+  // stockfish.postMessage("isready");
   // }
 }
 

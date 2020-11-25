@@ -1,11 +1,12 @@
 DEPTH = 20;
 DEBUG = false;
 var stopNOW = false;
+var finished = false;
 var fenIdx;
 var score;
 var evals = [];
 var printout = [];
-var stockfish = new Worker("node_modules/stockfish/src/stockfish.js")
+var stockfish = new Worker("node_modules/stockfish/src/stockfish.js");
 
 // var stockfish = STOCKFISH();
 stockfish.onmessage = function(event) {
@@ -17,6 +18,7 @@ stockfish.onmessage = function(event) {
 	} else if (event.data == "readyok") {
 		// start looping through the fens
 		stopNOW = false;
+		finished = false;
 		fenIdx = 0;
 		stockfish.postMessage("position fen " + fens[fenIdx]);
 		stockfish.postMessage("go depth " + DEPTH);
@@ -25,11 +27,19 @@ stockfish.onmessage = function(event) {
 			data = event.data.split(" ");
 			depth = data[data.indexOf("depth") + 1];
 			// if (depth == DEPTH) {
-			score = Number(data[data.indexOf("cp")+1])/100;
+			if (data.includes("mate")) {
+				if (Number(data[data.indexOf("mate")+1]) > 0) {
+					score = 150;
+				} else {
+					score = -150;
+				}
+			} else {
+				score = Number(data[data.indexOf("cp")+1])/100;
+			}
 			// reverse the evaluation if the engine is moving for black
 			if (!fens[fenIdx].includes("w")) {
 				score = -score;
-			}
+		}
 			// document.getElementById("printout").innerHTML = score + " " + evals.length;
 			evals.push(score);
 			var evalHTML = "";
@@ -61,7 +71,14 @@ stockfish.onmessage = function(event) {
 					printout.push(event.data);
 					document.getElementById("printout").innerHTML = "<p>" + printout.join("</p><p>") + "</p>";
 				}
+			} else {
+				finished = true;
 			}
+		}
+	} else {
+		document.getElementById("evals").innerHTML = "Loading..."
+		if (event.data.includes("bestmove")) {
+			stockfish.postMessage("isready");
 		}
 	}
 	// document.getElementById("printout").innerHTML = evals.join(" ");
