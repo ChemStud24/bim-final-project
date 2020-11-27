@@ -1,0 +1,29 @@
+{
+  "name": "bim-final-project",
+  "version": "1.0.0",
+  "description": "An app that narrates chess.com games with music that changes to match the game context",
+  "main": "engine.js",
+  "dependencies": {
+    "chess.js": "^0.11.0",
+    "stockfish": "^11.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChemStud24/bim-final-project.git"
+  },
+  "keywords": [
+    "chess",
+    "music",
+    "generation"
+  ],
+  "author": "Will Johnson and Yeshwanth Venkatesha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChemStud24/bim-final-project/issues"
+  },
+  "homepage": "https://github.com/ChemStud24/bim-final-project#readme"
+}
