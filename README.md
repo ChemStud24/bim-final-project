@@ -14,3 +14,4 @@ Things to fix/add:
 -- moves list looks weird near the control buttons
 -- filter out 960 and other variants
 --bug on my first November game PGN
+--flip board to be our side
